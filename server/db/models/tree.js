@@ -10,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Tree.belongsToMany(models.Insect, {through: models.InsectTree, foreignKey: 'treeId', otherKey:'insectId'})
     }
   };
   Tree.init({
-    tree: DataTypes.STRING,
+    tree: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     location: DataTypes.STRING,
     heightFt: {
       type: DataTypes.FLOAT,
